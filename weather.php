@@ -40,6 +40,7 @@ $currentTime = time();
     </form>     
     <!-- Data lấy từ API được hiển thị -->
     <div class="report-container">
+        <!-- Kiểm tra dữ liệu trả về có đúng không -->
         <?php 
             if(!isset($data->name)){
                 echo "<h2>Wrong ZipCode</h2>";
@@ -48,10 +49,13 @@ $currentTime = time();
         ?>
         <h2><?php echo $data->name; ?> Weather Status</h2>
         <div class="time">
+            <!-- Thời gian thứ ngày, giờ, tháng, năm -->
             <div><?php echo date("l g:i a", $currentTime); ?></div>
             <div><?php echo date("jS F, Y",$currentTime); ?></div>
+            <!-- Tình trạng thời tiết -->
             <div><?php echo ucwords($data->weather[0]->description); ?></div>
         </div>
+        <!-- Nhiệt độ cao nhất thấp nhất -->
         <div class="weather-forecast">
             <img
                 src="http://openweathermap.org/img/w/<?php echo $data->weather[0]->icon; ?>.png"
@@ -60,7 +64,9 @@ $currentTime = time();
                 class="min-temperature"><?php echo $data->main->temp_min; ?>&deg;C</span>
         </div>
         <div class="time">
+            <!-- Độ ẩm -->
             <div>Humidity: <?php echo $data->main->humidity; ?> %</div>
+            <!-- Sức gió -->
             <div>Wind: <?php echo $data->wind->speed; ?> km/h</div>
         </div>
     </div>
