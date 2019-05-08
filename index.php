@@ -1,8 +1,8 @@
 <?php
-$apiKey = "API KEY";
-$cityId = "ZIP CODE";
-$googleApiUrl = "api.openweathermap.org/data/2.5/weather?zip=92703,us&lang=en&units=metric&APPID=" . $apiKey;
-///* . $cityId */
+$apiKey = "9d3d49d7940b60c61fc4cf7d8d41fe14";
+$cityZip = $_POST['zip'];
+$googleApiUrl = "api.openweathermap.org/data/2.5/weather?zip=" . $cityZip ."&lang=en&units=metric&APPID=" . $apiKey;
+
 
 $ch = curl_init();
 
@@ -74,7 +74,7 @@ span.min-temperature {
 }
 .input-zip{
     align-items:center;
-    text-align:center;
+    /* text-align:center; */
     display:flex;
     justify-content:center;
 }
@@ -82,9 +82,9 @@ span.min-temperature {
 
 </head>
 <body>
-    <div class="input-zip" >
-        <input class="zip"  type="text" name="zip code" placeholder="input your zip code"><br>
-    </div>
+    <form class="input-zip" method="POST">
+        <input class="zip"  type="text" name="zip" placeholder="input your zip code"><br>
+</form>
     
     <div class="report-container">
         <h2><?php echo $data->name; ?> Weather Status</h2>
