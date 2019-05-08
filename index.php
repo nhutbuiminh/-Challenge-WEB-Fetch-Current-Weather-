@@ -1,7 +1,8 @@
 <?php
 $apiKey = "API KEY";
-$cityId = "CITY ID";
-$googleApiUrl = "http://api.openweathermap.org/data/2.5/weather?id=" . $cityId . "&lang=en&units=metric&APPID=" . $apiKey;
+$cityId = "ZIP CODE";
+$googleApiUrl = "api.openweathermap.org/data/2.5/weather?zip=92703,us&lang=en&units=metric&APPID=" . $apiKey;
+///* . $cityId */
 
 $ch = curl_init();
 
@@ -58,11 +59,33 @@ span.min-temperature {
 .time {
     line-height: 25px;
 }
+.zip{
+    color: #212121;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 20px 0px;
+    align-items:center;
+    text-align:center;
+    display:flex;
+    border: #E0E0E0 1px solid;
+    width: 550px;
+    height:50px;
+
+}
+.input-zip{
+    align-items:center;
+    text-align:center;
+    display:flex;
+    justify-content:center;
+}
 </style>
 
 </head>
 <body>
-
+    <div class="input-zip" >
+        <input class="zip"  type="text" name="zip code" placeholder="input your zip code"><br>
+    </div>
+    
     <div class="report-container">
         <h2><?php echo $data->name; ?> Weather Status</h2>
         <div class="time">
@@ -73,7 +96,8 @@ span.min-temperature {
         <div class="weather-forecast">
             <img
                 src="http://openweathermap.org/img/w/<?php echo $data->weather[0]->icon; ?>.png"
-                class="weather-icon" /> <?php echo $data->main->temp_max; ?>&deg;C<span
+                class="weather-icon" /> <?php echo $data->main->temp_max; ?>&deg;C
+                <span
                 class="min-temperature"><?php echo $data->main->temp_min; ?>&deg;C</span>
         </div>
         <div class="time">
