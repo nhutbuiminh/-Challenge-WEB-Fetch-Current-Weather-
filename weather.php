@@ -1,11 +1,10 @@
 <?php
 $apiKey = "9d3d49d7940b60c61fc4cf7d8d41fe14";
-$cityZip="";
-if(isset($_POST['submit'])){
-    $cityZip = isset($_POST['zip']);
+$cityZip= '94040';
+if(isset($_POST['zip'])){
+    $cityZip = $_POST['zip'];
 }
-$googleApiUrl = "api.openweathermap.org/data/2.5/weather?zip=" . $cityZip .",us&lang=en&units=metric&APPID=" . $apiKey;
-
+$googleApiUrl = "api.openweathermap.org/data/2.5/weather?zip=" . $cityZip ."&lang=en&units=metric&APPID=" . $apiKey;
 
 $ch = curl_init();
 
@@ -25,73 +24,22 @@ $currentTime = time();
 <!doctype html>
 <html>
 <head>
-<title>Forecast Weather using OpenWeatherMap with PHP</title>
-
-<style>
-body {
-    font-family: Arial;
-    font-size: 0.95em;
-    color: #929292;
-}
-
-.report-container {
-    border: #E0E0E0 1px solid;
-    padding: 20px 40px 40px 40px;
-    border-radius: 2px;
-    width: 550px;
-    margin: 0 auto;
-}
-
-.weather-icon {
-    vertical-align: middle;
-    margin-right: 20px;
-}
-
-.weather-forecast {
-    color: #212121;
-    font-size: 1.2em;
-    font-weight: bold;
-    margin: 20px 0px;
-}
-
-span.min-temperature {
-    margin-left: 15px;
-    color: #929292;
-}
-
-.time {
-    line-height: 25px;
-}
-.zip{
-    color: #212121;
-    font-size: 1.2em;
-    font-weight: bold;
-    margin: 20px 0px;
-    align-items:center;
-    text-align:center;
-    display:flex;
-    border: #E0E0E0 1px solid;
-    width: 550px;
-    height:50px;
-
-}
-.input-zip{
-    align-items:center;
-    /* text-align:center; */
-    display:flex;
-    justify-content:center;
-}
-</style>
-
+    <title>Thông tin thời tiết</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <form class="input-zip" action="/weather.php" method="POST">
-    
-        <input class="zip"  type="text" name="zip" placeholder="input your zip code"><br>
+    <form class="input-zip" action="" method="POST">
+        <input class="zip"  type="text" name="zip" placeholder="input your zip code" value="<?php echo $cityZip ?>"><br>
         <input type="submit" value="Check">
-</form>
+    </form>     
     
     <div class="report-container">
+        <?php 
+            if(!isset($data->name)){
+                echo "<h2>Wrong ZipCode</h2>";
+                die();
+            }
+        ?>
         <h2><?php echo $data->name; ?> Weather Status</h2>
         <div class="time">
             <div><?php echo date("l g:i a", $currentTime); ?></div>
@@ -110,7 +58,7 @@ span.min-temperature {
             <div>Wind: <?php echo $data->wind->speed; ?> km/h</div>
         </div>
     </div>
-
-
 </body>
 </html>
+
+
